@@ -1,0 +1,12 @@
+
+/*Zoom*/
+#scale-element {
+  display: block;
+  max-width: 100%;
+  margin: 1rem auto;
+  touch-action: none;
+}
+
+#scale-element.reset {
+  transition: transform 0.3s ease-in-out;
+}
