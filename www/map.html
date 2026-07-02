@@ -24,9 +24,25 @@
         </div>
     </div>
 
-    <div class="card bg-white border-0 shadow rounded-4 mt-3 mx-3 z-1">
-        <div id="gesture-area" class="card-body p-4 p-md-5">
-            <img src="components/images/UUM_Map.webp" id="uum_Map" class="img-fluid w-100 rounded" alt="UUM Map">
+    <!-- Map Container -->
+    <div class="card bg-white border-0 p-2 shadow rounded-2 mt-3 mx-3 z-1 overflow-hidden">
+        <div class="card-body p-0 position-relative">
+
+            <!-- Map -->
+            <img src="components/images/UUM_Map.webp" id="uum-Map" class="w-100 h-100 object-fit-cover opacity-75"
+                alt="UUM Map" draggable="false"
+                style="transform-origin: center; touch-action: none; user-select: none; -webkit-user-drag: none; overscroll-behavior: none;">
+
+            <!-- Overlay -->
+            <div id="map-Hint"
+                class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+                style="background-color: rgba(0, 0, 0, 0.4); pointer-events: none; transition: opacity 0.4s ease;">
+
+                <h5 class="text-white fw-bold mb-0">Double tap to zoom</h5>
+                <p class="text-white-50 small mb-0 fw-medium">Drag to explore</p>
+
+            </div>
+
         </div>
     </div>
 
