@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="cordova.js"></script>
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link href="components/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="components/css/main.css">
+</head>
+
+<body>
+    <div class="bg-light position-relative px-0 pb-5 min-vh-100 overflow-hidden">
+
+        <!-- Header / Hero Section -->
+        <div class="position-relative bg-dark text-white shadow-sm overflow-hidden p-4 pt-5 pb-5 mb-4">
+            <img src="components/images/UUM_View.webp"
+                class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-50" alt="UUM Background">
+
+            <div class="position-relative z-1 mt-4 mb-5">
+                <h2 class="fw-bold mb-0">Welcome to</h2>
+                <h1 class="fw-bold mb-3 text-info">UUM Spots</h1>
+
+                <p class="mb-4 text-white-50 small w-75">
+                    Discover the best places around UUM Sintok.
+                </p>
+
+                <p class="mb-0 small text-white-50 d-flex align-items-center fw-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="me-2"
+                        viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                    </svg>
+                    UUM Sintok, Kedah
+                </p>
+            </div>
+        </div>
+
+        <div class="container position-relative z-1 mt-n5">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-10 col-md-8 col-lg-5">
+
+                    <div class="card bg-white border-0 shadow-lg rounded-4 w-100 pt-3 position-relative">
+
+                        <div class="card-body p-4 p-md-5">
+
+                            <div class="text-center mb-4">
+                                <h4 class="fw-bold text-dark mb-1">Welcome Back!</h4>
+                                <p class="text-muted small">Sign in to continue exploring UUM Spots</p>
+                            </div>
+
+                            <form action="home.html">
+
+                                <!-- Username -->
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold text-dark mb-1">Username</label>
+                                    <input type="text" class="form-control shadow-none text-muted"
+                                        placeholder="Enter your username" required>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold text-dark mb-1">Password</label>
+                                    <input type="password" class="form-control shadow-none text-muted"
+                                        placeholder="Enter your password" required>
+                                </div>
+
+                                <!-- Forgot Pass & New Acc -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <a href="signUp.html" class="text-decoration-none small fw-medium text-primary">
+                                        Create Account
+                                    </a>
+                                    <a href="#" class="text-decoration-none small fw-medium text-primary">
+                                        Forgot password
+                                    </a>
+                                </div>
+
+                                <button type="submit"
+                                    class="btn btn-primary w-100 rounded-3 mt-2 py-2 fw-medium text-white d-flex justify-content-center align-items-center shadow-sm">
+                                    Sign In
+                                </button>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="components/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

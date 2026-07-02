@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="cordova.js"></script>
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link href="components/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="components/css/main.css">
+</head>
+
+<body>
+    <div class="bg-light position-relative px-0 pb-5 min-vh-100 overflow-hidden">
+
+        <!-- Header -->
+        <div class="position-relative bg-dark text-white shadow-sm overflow-hidden p-4 pt-5 pb-5 mb-4">
+            <img src="components/images/UUM_View.webp"
+                class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-50" alt="UUM Background">
+
+            <div class="position-relative z-1 mt-4 mb-5">
+                <h2 class="fw-bold mb-0">Join</h2>
+                <h1 class="fw-bold mb-3 text-info">UUM Spots</h1>
+
+                <p class="mb-4 text-white-50 small w-75">
+                    Create an account to discover the best places around UUM Sintok.
+                </p>
+
+                <p class="mb-0 small text-white-50 d-flex align-items-center fw-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="me-2"
+                        viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                    </svg>
+                    UUM Sintok, Kedah
+                </p>
+            </div>
+        </div>
+
+        <div class="container position-relative z-1">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-10 col-md-8 col-lg-5">
+
+                    <div class="card bg-white border-0 shadow-lg rounded-4 w-100 pt-3 position-relative">
+
+                        <div class="card-body p-md-5">
+
+                            <div class="text-center">
+                                <h4 class="fw-bold text-dark mb-1">Create Account</h4>
+                                <p class="text-muted small">Fill in your details to get started</p>
+                            </div>
+
+                            <!-- Form with Validation -->
+                            <form id="signupForm" class="needs-validation" novalidate>
+                                
+                                <!-- Name -->
+                                <div class="mb-3">
+                                    <label for="regName" class="form-label small fw-bold text-dark mb-1">Full Name</label>
+                                    <input type="text" class="form-control shadow-none text-muted" id="regName" name="name" placeholder="Enter your full name" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter your name.</div>
+                                </div>
+
+                                <!-- Username -->
+                                <div class="mb-3">
+                                    <label for="regUsername" class="form-label small fw-bold text-dark mb-1">Username</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text bg-light text-muted border-end-0" id="inputGroupPrepend">@</span>
+                                        <input type="text" class="form-control border-start-0 shadow-none text-muted" id="regUsername" name="username" aria-describedby="inputGroupPrepend" placeholder="Choose a username" required>
+                                        <div class="invalid-feedback">Please choose a username.</div>
+                                    </div>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="mb-4">
+                                    <label for="regPassword" class="form-label small fw-bold text-dark mb-1">Password</label>
+                                    <input type="password" class="form-control shadow-none text-muted" id="regPassword" name="password" placeholder="Create a password" required>
+                                    <div class="invalid-feedback">Please enter a password.</div>
+                                </div>
+
+                                <!-- Terms Checkbox -->
+                                <div class="mb-4">
+                                    <div class="form-check d-flex align-items-center mb-0">
+                                        <input class="form-check-input shadow-none mt-0 me-2" type="checkbox" value="" id="invalidCheck" required>
+                                        <label class="form-check-label text-dark fw-medium small" for="invalidCheck">
+                                            I agree to the terms and conditions
+                                        </label>
+                                        <div class="invalid-feedback">You must agree.</div>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="d-flex gap-2">
+                                    <a href="index.html" class="btn btn-light w-50 rounded-3 py-2 fw-medium text-dark shadow-sm border">Back</a>
+                                    <button class="btn btn-primary w-50 rounded-3 py-2 fw-medium text-white shadow-sm" type="submit">Register</button>
+                                </div>
+
+                                <!-- Divider & Login Link -->
+                                <div class="text-center mt-4">
+                                    <span class="text-muted small">Already have an account?</span>
+                                    <a href="index.html" class="text-decoration-none fw-bold text-primary ms-1 small">Sign in</a>
+                                </div>
+
+                            </form>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="components/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Bootstrap Validation Script -->
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+</body>
+
+</html>
