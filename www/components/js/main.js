@@ -1,47 +1,51 @@
-var angleScale = {
-  angle: 0,
-  scale: 1
-}
-var gestureArea = document.getElementById('gesture-area')
-var scaleElement = document.getElementById('scale-element')
-var resetTimeout
+const mapElement = document.getElementById('uum_Map');
+    let scale = 1;
+    let position = { x: 0, y: 0 };
 
-interact(gestureArea)
-  .gesturable({
-    listeners: {
-      start (event) {
-        angleScale.angle -= event.angle
+    const updateTransform = () => {
+        mapElement.style.transform = `scale(${scale}) translate(${position.x}px, ${position.y}px)`;
+    };
 
-        clearTimeout(resetTimeout)
-        scaleElement.classList.remove('reset')
-      },
-      move (event) {
-        // document.body.appendChild(new Text(event.scale))
-        var currentAngle = event.angle + angleScale.angle
-        var currentScale = event.scale * angleScale.scale
+    interact(mapElement)
+        .draggable({
+            inertia: true, 
+            listeners: {
+                move(event) {
+                    if (scale > 1) {
+                        position.x += event.dx / scale;
+                        position.y += event.dy / scale;
+                        updateTransform();
+                    }
+                }
+            }
+        })
+        .gesturable({
+            listeners: {
+                move(event) {
+                    scale = scale * (1 + event.ds);
+                    scale = Math.max(1, Math.min(scale, 4));
+                    if (scale === 1) {
+                        position.x = 0;
+                        position.y = 0;
+                    }
+                    updateTransform();
+                }
+            }
+        })
+        .on('doubletap', function (event) {
+            mapElement.style.transition = 'transform 0.3s ease-in-out';
+            
+            if (scale === 1) {
+                scale = 2.5; 
+            } else {
+                scale = 1;
+                position.x = 0;
+                position.y = 0;
+            }
+            
+            updateTransform();
 
-        scaleElement.style.transform =
-          'rotate(' + currentAngle + 'deg)' + 'scale(' + currentScale + ')'
-
-        // uses the dragMoveListener from the draggable demo above
-        dragMoveListener(event)
-      },
-      end (event) {
-        angleScale.angle = angleScale.angle + event.angle
-        angleScale.scale = angleScale.scale * event.scale
-
-        resetTimeout = setTimeout(reset, 1000)
-        scaleElement.classList.add('reset')
-      }
-    }
-  })
-  .draggable({
-    listeners: { move: dragMoveListener }
-  })
-
-function reset () {
-  scaleElement.style.transform = 'scale(1)'
-
-  angleScale.angle = 0
-  angleScale.scale = 1
-}
+            setTimeout(() => {
+                mapElement.style.transition = 'none';
+            }, 300);
+        });
