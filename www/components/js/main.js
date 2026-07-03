@@ -1,3 +1,24 @@
+    const dynamicModal = document.getElementById('dynamicModal');
+    
+    // Listen for the Bootstrap modal 'show' event
+    dynamicModal.addEventListener('show.bs.modal', function (event) {
+        
+        // 1. Get the card that was clicked
+        const clickedCard = event.relatedTarget;
+        
+        // 2. Extract the data attributes from that card
+        const title = clickedCard.getAttribute('data-title');
+        const category = clickedCard.getAttribute('data-category');
+        const desc = clickedCard.getAttribute('data-desc');
+        const img = clickedCard.getAttribute('data-img');
+        
+        // 3. Inject that data into the modal's HTML elements
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalCategory').textContent = category;
+        document.getElementById('modalDesc').textContent = desc;
+        document.getElementById('modalImg').src = img;
+    });
+
 
 /* Map Zoom */
 const mapElement = document.getElementById('uum-Map');

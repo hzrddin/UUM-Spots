@@ -111,9 +111,14 @@
             </div>
 
             <!-- Directory -->
-            <div class="d-flex flex-column gap-3 mt-1 pb-5">
+            <div class="d-flex flex-column gap-2 mt-1 pb-5">
 
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative"
+                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dynamicModal"
+                    data-title="Ostrich Farm" data-category="Nature & Animals"
+                    data-desc="Get up close with our friendly ostriches!"
+                    data-img="components/images/karting-star-bali.webp">
+
                     <div class="row g-0">
                         <div class="col-4 col-md-3 col-lg-2">
                             <img src="components/images/karting-star-bali.webp"
@@ -122,11 +127,11 @@
                         <div class="col-8 col-md-9 col-lg-10">
                             <div class="card-body p-2 px-3 d-flex flex-column justify-content-between h-100">
                                 <div>
-                                    <h6 class="card-title fw-bold mb-1  pe-4">Ostrich Farm</h6>
+                                    <h6 class="card-title fw-bold mb-1 pe-4">Ostrich Farm</h6>
                                     <span class="badge text-bg-success rounded-pill mb-1 fw-normal">Nature &
                                         Animals</span>
-                                    <p class="card-text text-muted small  mb-0">Get up close with our
-                                        friendly ostriches!</p>
+                                    <p class="card-text text-muted small mb-0">Get up close with our friendly ostriches!
+                                    </p>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mt-2">
                                     <small class="text-secondary d-flex align-items-center">
@@ -143,7 +148,11 @@
                     </div>
                 </div>
 
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative mb-3"
+                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dynamicModal"
+                    data-title="UUM Go-Kart" data-category="Sports" data-desc="Feel the speed at Sintok Go-Kart Track."
+                    data-img="components/images/karting-star-bali.webp">
+
                     <div class="row g-0">
                         <div class="col-4 col-md-3 col-lg-2">
                             <img src="components/images/karting-star-bali.webp"
@@ -154,8 +163,8 @@
                                 <div>
                                     <h6 class="card-title fw-bold mb-1 pe-4">UUM Go-Kart</h6>
                                     <span class="badge text-bg-success rounded-pill mb-1 fw-normal">Sports</span>
-                                    <p class="card-text text-muted small mb-0">Feel the speed at Sintok
-                                        Go-Kart Track.</p>
+                                    <p class="card-text text-muted small mb-0">Feel the speed at Sintok Go-Kart Track.
+                                    </p>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mt-2">
                                     <small class="text-secondary d-flex align-items-center">
@@ -171,65 +180,32 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative">
-                    <div class="row g-0">
-                        <div class="col-4 col-md-3 col-lg-2">
-                            <img src="components/images/karting-star-bali.webp"
-                                class="img-fluid h-100 w-100 object-fit-cover" alt="Go-Kart" style="min-height: 120px;">
+            <!-- The Dynamic Modal -->
+            <div class="modal fade" id="dynamicModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-4 border-0 shadow">
+
+                        <img src="" id="modalImg" class="w-100 object-fit-cover rounded-top-4" style="height: 200px;"
+                            alt="Place Image">
+
+                        <button type="button"
+                            class="btn-close position-absolute top-0 end-0 m-3 bg-white p-2 rounded-circle shadow-sm"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+
+                        <div class="modal-body p-4">
+                            <span id="modalCategory" class="badge text-bg-success rounded-pill mb-2 fw-normal"></span>
+                            <h5 id="modalTitle" class="fw-bold mb-3"></h5>
+                            <p id="modalDesc" class="text-muted mb-0"></p>
                         </div>
-                        <div class="col-8 col-md-9 col-lg-10">
-                            <div class="card-body p-2 px-3 d-flex flex-column justify-content-between h-100">
-                                <div>
-                                    <h6 class="card-title fw-bold mb-1  pe-4">UUM Go-Kart</h6>
-                                    <span class="badge text-bg-success rounded-pill mb-1 fw-normal">Sports</span>
-                                    <p class="card-text text-muted small  mb-0">Feel the speed at Sintok
-                                        Go-Kart Track.</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <small class="text-secondary d-flex align-items-center">
-                                        View
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                            fill="currentColor" class="ms-1" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                                        </svg>
-                                    </small>
-                                </div>
-                            </div>
+
+                        <div class="modal-footer border-0 p-4 pt-0">
+                            <button type="button" class="btn btn-primary w-100 rounded-3 py-2 fw-medium">Navigate
+                                Here</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative">
-                    <div class="row g-0">
-                        <div class="col-4 col-md-3 col-lg-2">
-                            <img src="components/images/karting-star-bali.webp"
-                                class="img-fluid h-100 w-100 object-fit-cover" alt="Go-Kart" style="min-height: 120px;">
-                        </div>
-                        <div class="col-8 col-md-9 col-lg-10">
-                            <div class="card-body p-2 px-3 d-flex flex-column justify-content-between h-100">
-                                <div>
-                                    <h6 class="card-title fw-bold mb-1  pe-4">UUM Go-Kart</h6>
-                                    <span class="badge text-bg-success rounded-pill mb-1 fw-normal">Sports</span>
-                                    <p class="card-text text-muted small  mb-0">Feel the speed at Sintok
-                                        Go-Kart Track.</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <small class="text-secondary d-flex align-items-center">
-                                        View
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                            fill="currentColor" class="ms-1" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-                                        </svg>
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
 
@@ -283,6 +259,7 @@
     </div>
 
     <script src="components/js/bootstrap.bundle.min.js"></script>
+    <script src="components/js/main.js"></script>
 </body>
 
 </html>
