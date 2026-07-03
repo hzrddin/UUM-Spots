@@ -71,11 +71,12 @@
 
                 <!-- Filter -->
                 <div class="d-flex gap-1 overflow-x-auto pb-2" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    <button type="button"
-                        class="btn btn-primary rounded-pill btn-sm px-4 fw-medium shadow-sm">All</button>
+                    <button type="button" onclick="filter('all')"
+                        class="btn btn-primary rounded-pill btn-sm px-4 fw-medium shadow-sm">
+                        All</button>
 
                     <!-- Nature & Animals -->
-                    <button type="button"
+                    <button type="button" onclick="filter('n&a')"
                         class="btn btn-white rounded-pill btn-sm px-3 fw-medium text-secondary shadow-sm border d-flex align-items-center text-nowrap">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="text-success me-2" viewBox="0 0 16 16">
@@ -86,7 +87,7 @@
                     </button>
 
                     <!-- Activities -->
-                    <button type="button"
+                    <button type="button" onclick="('actv')"
                         class="btn btn-white rounded-pill btn-sm px-3 fw-medium text-secondary shadow-sm border d-flex align-items-center text-nowrap">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="text-danger me-2" viewBox="0 0 16 16">
@@ -97,7 +98,7 @@
                     </button>
 
                     <!-- Landmarks -->
-                    <button type="button"
+                    <button type="button" onclick="('landm')"
                         class="btn btn-white rounded-pill btn-sm px-3 fw-medium text-secondary shadow-sm border d-flex align-items-center text-nowrap">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="text-warning me-2" viewBox="0 0 16 16">
@@ -112,6 +113,40 @@
 
             <!-- Directory -->
             <div class="d-flex flex-column gap-2 mt-1 pb-5">
+
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative mb-3"
+                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dynamicModal"
+                    data-title="Bulatan Masa" data-category="Landmark"
+                    data-desc="Snap a memory at the iconic Bulatan Masa."
+                    data-img="components/images/karting-star-bali.webp">
+
+                    <div class="row g-0">
+                        <div class="col-4 col-md-3 col-lg-2">
+                            <img src="components/images/karting-star-bali.webp"
+                                class="img-fluid h-100 w-100 object-fit-cover" alt="Go-Kart" style="min-height: 120px;">
+                        </div>
+                        <div class="col-8 col-md-9 col-lg-10">
+                            <div class="card-body p-2 px-3 d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <h6 class="card-title fw-bold mb-1 pe-4">Bulatan Masa</h6>
+                                    <span class="badge text-bg-warning rounded-pill mb-1 fw-normal">Landmark</span>
+                                    <p class="card-text text-muted small mb-0">Snap a memory at the iconic Bulatan Masa.
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <small class="text-secondary d-flex align-items-center">
+                                        View
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                            fill="currentColor" class="ms-1" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                                        </svg>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative"
                     style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dynamicModal"
@@ -162,7 +197,7 @@
                             <div class="card-body p-2 px-3 d-flex flex-column justify-content-between h-100">
                                 <div>
                                     <h6 class="card-title fw-bold mb-1 pe-4">UUM Go-Kart</h6>
-                                    <span class="badge text-bg-success rounded-pill mb-1 fw-normal">Sports</span>
+                                    <span class="badge text-bg-danger rounded-pill mb-1 fw-normal">Sports</span>
                                     <p class="card-text text-muted small mb-0">Feel the speed at Sintok Go-Kart Track.
                                     </p>
                                 </div>
@@ -180,9 +215,80 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative mb-3"
+                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dynamicModal" data-title="Pet Farm"
+                    data-category="Nature & Animals" data-desc="Pet the friendly rabbits at the Pet Farm."
+                    data-img="components/images/karting-star-bali.webp">
+
+                    <div class="row g-0">
+                        <div class="col-4 col-md-3 col-lg-2">
+                            <img src="components/images/karting-star-bali.webp"
+                                class="img-fluid h-100 w-100 object-fit-cover" alt="Go-Kart" style="min-height: 120px;">
+                        </div>
+                        <div class="col-8 col-md-9 col-lg-10">
+                            <div class="card-body p-2 px-3 d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <h6 class="card-title fw-bold mb-1 pe-4">Pet Farm</h6>
+                                    <span class="badge text-bg-success rounded-pill mb-1 fw-normal">Nature &
+                                        Animals</span>
+                                    <p class="card-text text-muted small mb-0">Pet the friendly rabbits at the Pet Farm.
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <small class="text-secondary d-flex align-items-center">
+                                        View
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                            fill="currentColor" class="ms-1" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                                        </svg>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative mb-3"
+                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dynamicModal"
+                    data-title="Deer Park" data-category="Nature & Animals"
+                    data-desc="Say hello to the deer at Deer Park."
+                    data-img="components/images/karting-star-bali.webp">
+
+                    <div class="row g-0">
+                        <div class="col-4 col-md-3 col-lg-2">
+                            <img src="components/images/karting-star-bali.webp"
+                                class="img-fluid h-100 w-100 object-fit-cover" alt="Go-Kart" style="min-height: 120px;">
+                        </div>
+                        <div class="col-8 col-md-9 col-lg-10">
+                            <div class="card-body p-2 px-3 d-flex flex-column justify-content-between h-100">
+                                <div>
+                                    <h6 class="card-title fw-bold mb-1 pe-4">Deer Park</h6>
+                                    <span class="badge text-bg-success rounded-pill mb-1 fw-normal">Nature &
+                                        Animals</span>
+                                    <p class="card-text text-muted small mb-0">Say hello to the deer at Deer Park.
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <small class="text-secondary d-flex align-items-center">
+                                        View
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                            fill="currentColor" class="ms-1" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+                                        </svg>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
-            <!-- The Dynamic Modal -->
+            <!-- Dynamic Modal -->
             <div class="modal fade" id="dynamicModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content rounded-4 border-0 shadow">
@@ -207,7 +313,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
 
