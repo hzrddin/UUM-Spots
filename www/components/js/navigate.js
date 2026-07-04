@@ -289,7 +289,7 @@ window.endNavigation = function () {
             const savedImage = result.value.image;
             const savedCaption = result.value.caption;
 
-            // Success confirmation
+            // Success
             Swal.fire({
                 title: 'Saved!',
                 text: 'Your moment is saved.',
@@ -297,7 +297,12 @@ window.endNavigation = function () {
                 confirmButtonColor: '#0d6efd',
                 timer: 2000,
                 showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'history.html';
             });
+
+        } else {
+            window.location.href = 'home.html';
         }
     });
 };
