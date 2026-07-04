@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <script src="cordova.js"></script>
     <script src="components/loader.js"></script>
     <link rel="stylesheet" href="components/loader.css">
     <link href="components/css/bootstrap.min.css" rel="stylesheet">
@@ -118,7 +117,9 @@
                     style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dynamicModal"
                     data-title="Bulatan Masa" data-category="Landmark"
                     data-desc="Snap a memory at the iconic Bulatan Masa."
-                    data-img="components/images/bulatan_masa.webp">
+                    data-img="components/images/bulatan_masa.webp"
+                    data-lat="6.4475"
+                    data-lng="100.5094">
 
                     <div class="row g-0">
                         <div class="col-4 col-md-3 col-lg-2">
@@ -186,7 +187,7 @@
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative"
                     style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dynamicModal"
                     data-title="UUM Go-Kart" data-category="Sports" data-desc="Feel the speed at Sintok Go-Kart Track."
-                    data-img="components/images/karting-star-bali.webp">
+                    data-img="components/images/karting-star-bali.webp" data-lat="6.4702" data-lng="100.5040">
 
                     <div class="row g-0">
                         <div class="col-4 col-md-3 col-lg-2">
@@ -253,8 +254,7 @@
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative"
                     style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#dynamicModal"
                     data-title="Deer Park" data-category="Nature & Animals"
-                    data-desc="Say hello to the deer at Deer Park."
-                    data-img="components/images/karting-star-bali.webp">
+                    data-desc="Say hello to the deer at Deer Park." data-img="components/images/karting-star-bali.webp">
 
                     <div class="row g-0">
                         <div class="col-4 col-md-3 col-lg-2">
@@ -307,7 +307,9 @@
                         </div>
 
                         <div class="modal-footer border-0 p-4 pt-0">
-                            <button type="button" class="btn btn-primary w-100 rounded-3 py-2 fw-medium">Go here</button>
+                            <button type="button" onclick="navigate()"
+                                class="btn btn-primary w-100 rounded-3 py-2 fw-medium">
+                                Go here</button>
                         </div>
                     </div>
                 </div>
