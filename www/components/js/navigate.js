@@ -7,7 +7,7 @@ let destinationObj = null;
 let RouteLibrary = null;
 let userMarker = null;
 let watchId = null;
-let currentUserLocation = null;
+let currentUserLocation = null; // Saves initial GPS for exact arrow spawn
 
 document.getElementById('navTitle').textContent = localStorage.getItem('destTitle');
 
@@ -34,6 +34,7 @@ window.initMap = async function () {
     requestAndDrawRoute();
 };
 
+// Sweetalert finding
 window.retryLocation = function () {
     Swal.fire({
         title: 'Finding location...',
@@ -43,7 +44,7 @@ window.retryLocation = function () {
     requestAndDrawRoute();
 };
 
-// Core Routing Logic (Stripped of turn-by-turn data)
+// Core Routing Logic
 function requestAndDrawRoute() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -55,13 +56,14 @@ function requestAndDrawRoute() {
                     lng: position.coords.longitude
                 };
 
+                // Save the exact loc
                 currentUserLocation = userLocation;
 
                 const request = {
                     origin: userLocation,
                     destination: destinationObj,
                     travelMode: 'DRIVING',
-                    fields: ['path', 'distanceMeters', 'durationMillis'] // Removed 'legs'
+                    fields: ['path', 'distanceMeters', 'durationMillis']
                 };
 
                 try {
@@ -133,7 +135,6 @@ function showLocationError() {
     });
 }
 
-// --- PURE LIVE TRACKING (No instructions) ---
 window.navigate = async function () {
     // Hide Setup UI
     document.getElementById('setupCardContainer').classList.add('d-none');
@@ -153,14 +154,16 @@ window.navigate = async function () {
         mapInstance.setTilt(55);
     }
 
-    // Create a Custom GPS Arrow Icon for the user's location
+    // GPS Arrow Icon
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     if (!userMarker) {
         const pin = document.createElement('div');
         pin.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" style="filter: drop-shadow(0px 4px 5px rgba(0,0,0,0.4));">
-                <path fill="#0d6efd" stroke="#ffffff" stroke-width="2" d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
-            </svg>
+            <div id="navArrow" style="transition: transform 0.2s ease-out; transform-origin: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" style="filter: drop-shadow(0px 4px 5px rgba(0,0,0,0.4));">
+                    <path fill="#0d6efd" stroke="#ffffff" stroke-width="2" d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
+                </svg>
+            </div>
         `;
 
         userMarker = new AdvancedMarkerElement({
@@ -170,7 +173,25 @@ window.navigate = async function () {
         });
     }
 
-    // Start Live GPS Tracking
+    // Compass Listener
+    const startCompassListener = () => {
+        window.addEventListener('deviceorientationabsolute', function (event) {
+            if (event.alpha !== null) {
+                const compassHeading = 360 - event.alpha;
+                const arrow = document.getElementById('navArrow');
+
+                if (arrow && mapInstance) {
+                    const mapHeading = mapInstance.getHeading() || 0;
+                    const finalRotation = compassHeading - mapHeading;
+                    arrow.style.transform = `rotate(${finalRotation}deg)`;
+                }
+            }
+        }, true);
+    };
+
+    startCompassListener();
+
+    // Live GPS Tracking
     if (navigator.geolocation && typeof turf !== 'undefined') {
         watchId = navigator.geolocation.watchPosition(
             (position) => {
@@ -184,7 +205,7 @@ window.navigate = async function () {
                     userMarker.position = livePos;
                 }
 
-                // Snap camera to user and rotate map based on direction faced
+                // Snap camera to user and rotate map based on GPS velocity
                 if (mapInstance) {
                     mapInstance.panTo(livePos);
                     if (position.coords.heading !== null && !isNaN(position.coords.heading)) {
