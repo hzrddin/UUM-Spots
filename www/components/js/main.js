@@ -4,7 +4,7 @@ const dynamicModal = document.getElementById('dynamicModal');
 // Listen
 dynamicModal.addEventListener('show.bs.modal', function (event) {
 
-    // Get the card that was clicked
+    // Get the clicked card
     const clickedCard = event.relatedTarget;
 
     // Extract data 

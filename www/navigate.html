@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="cordova.js"></script>
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link href="components/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="components/css/main.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="position-relative bg-dark shadow-sm p-4 pb-5">
+        <img src="components/images/UUM_View.webp"
+            class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-50" alt="UUM Background">
+
+        <div class="card border-0 bg-dark bg-opacity-50 position-relative z-1 text-center py-3">
+            <h4 class="fw-bold text-white mb-0">Map</h4>
+        </div>
+    </div>
+
+    <!-- Map Container -->
+    <div class="card bg-white border-0 p-2 shadow rounded-2 mt-3 mx-3 z-1 overflow-hidden">
+        <div class="card-body p-0 position-relative">
+
+            <!-- Map -->
+            <img src="components/images/UUM_Map.webp" id="uum-Map" class="w-100 h-100 object-fit-cover opacity-75"
+                alt="UUM Map" draggable="false"
+                style="transform-origin: center; touch-action: none; user-select: none; -webkit-user-drag: none; overscroll-behavior: none;">
+
+            <!-- Overlay -->
+            <div id="map-Hint"
+                class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+                style="background-color: rgba(0, 0, 0, 0.4); pointer-events: none; transition: opacity 0.4s ease;">
+
+                <h5 class="text-white fw-bold mb-0">Double tap to zoom</h5>
+                <p class="text-white small mb-0 fw-medium">Drag to explore</p>
+
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+    <script src="components/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="components/js/main.js"></script>
+</body>
+
+</html>
