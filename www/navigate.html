@@ -49,60 +49,45 @@
     <!-- Desc -->
     <div class="container-fluid px-3 mt-3">
         <div class="card border-0 shadow-sm rounded-4 bg-white">
-            <div class="card-body p-3">
+            <div class="card-body p-4">
 
-                <!-- Title -->
-                <h5 class="card-title fw-bold mb-3 text-dark" id="navTitle">Loading...</h5>
-                <div class="d-flex justify-content-between align-items-center">
-                    <!-- Distance -->
+                <h5 class="card-title fw-bold mb-4 text-dark text-center" id="descCardTitle">Loading...</h5>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="d-flex align-items-center text-muted">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                             class="text-primary me-2" viewBox="0 0 16 16">
                             <path
                                 d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
                         </svg>
-                        <span class="fw-medium text-dark" style="font-size: 15px;" id="routeDistance">-- km</span>
+                        <span class="fw-semibold text-dark" style="font-size: 16px;" id="routeDistance">-- km</span>
                     </div>
 
-                    <!-- ETA -->
                     <div
                         class="d-flex align-items-center badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2 shadow-sm border border-success border-opacity-25">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="me-1"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="me-2"
                             viewBox="0 0 16 16">
                             <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
                             <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
                         </svg>
-                        <span class="fw-bold" style="font-size: 13px;" id="routeTime">-- min</span>
+                        <span class="fw-bold" style="font-size: 14px;" id="routeTime">-- min</span>
                     </div>
-
                 </div>
-            </div>
-        </div>
-    </div>
 
-
-    <!-- Error Modal -->
-    <div class="modal fade" id="locationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-4 border-0 shadow">
-                <div class="modal-body p-4 text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
-                        class="text-danger mb-3" viewBox="0 0 16 16">
-                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-                    </svg>
-                    <h5 class="fw-bold mb-2">Location Required</h5>
-                    <p class="text-muted small mb-4">We need your current location for navigation. Please
-                        allow location access in device settings.</p>
-                    <button type="button" class="btn btn-primary w-100 rounded-pill py-2 fw-medium"
-                        onclick="retryLocation()">Try Again</button>
+                <div class="d-flex justify-content-center">
+                    <button type="button" onclick=""
+                        class="btn btn-primary px-5 w-75 fw-bold shadow-sm d-flex justify-content-center align-items-center gap-2">
+                        Let's Go
+                    </button>
                 </div>
+
             </div>
         </div>
     </div>
 
     <script src="components/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="components/js/sweetalert2.all.min.js"></script>
     <script src="components/js/config.js"></script>
     <script src="components/js/navigate.js"></script>
 </body>
