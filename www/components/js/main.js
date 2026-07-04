@@ -1,32 +1,53 @@
-    // Modal
-    const dynamicModal = document.getElementById('dynamicModal');
+const placeCards = document.querySelectorAll('.card[data-title]');
 
-    if (dynamicModal) {
-        dynamicModal.addEventListener('show.bs.modal', function (event) {
-            const clickedCard = event.relatedTarget;
-            if (!clickedCard) return;
+placeCards.forEach(card => {
+    card.addEventListener('click', function () {
+        // 1. Grab details 
+        const title = this.getAttribute('data-title');
+        const category = this.getAttribute('data-category');
+        const desc = this.getAttribute('data-desc');
+        const img = this.getAttribute('data-img');
+        const lat = this.getAttribute('data-lat');
+        const lng = this.getAttribute('data-lng');
 
-            const title = clickedCard.getAttribute('data-title');
-            const category = clickedCard.getAttribute('data-category');
-            const desc = clickedCard.getAttribute('data-desc');
-            const img = clickedCard.getAttribute('data-img');
-            const lat = clickedCard.getAttribute('data-lat');
-            const lng = clickedCard.getAttribute('data-lng');
+        // Badge color
+        let badgeColor = 'text-bg-success'; // Default for Nature & Animals
+        if (category === 'Landmark') badgeColor = 'text-bg-warning';
+        if (category === 'Sports') badgeColor = 'text-bg-danger';
 
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalCategory').textContent = category;
-            document.getElementById('modalDesc').textContent = desc;
-            document.getElementById('modalImg').src = img;
+        // Save
+        localStorage.setItem('destTitle', title);
+        localStorage.setItem('savedLat', lat);
+        localStorage.setItem('savedLng', lng);
 
-            localStorage.setItem('destTitle', title);
-            localStorage.setItem('savedLat', lat);
-            localStorage.setItem('savedLng', lng);
+        // SweetAlert2 popup
+        Swal.fire({
+            html: `
+                <div class="position-relative">
+                    <img src="${img}" class="w-100 object-fit-cover rounded-top" style="height: 200px; border-top-left-radius: 1rem; border-top-right-radius: 1rem;" alt="${title}">
+                </div>
+                <div class="p-4 text-start">
+                    <span class="badge ${badgeColor} rounded-pill mb-2 fw-normal">${category}</span>
+                    <h5 class="fw-bold mb-2 text-dark">${title}</h5>
+                    <p class="text-muted small mb-0">${desc}</p>
+                </div>
+            `,
+            showCloseButton: true,
+            confirmButtonText: 'Go here',
+            confirmButtonColor: '#0d6efd',
+            padding: '0',
+            customClass: {
+                popup: 'rounded-4 border-0 shadow',
+                confirmButton: 'w-100 mx-4 mb-4 mt-0 rounded-3 py-2 fw-medium shadow-sm',
+                closeButton: 'bg-white shadow-sm rounded-circle m-2'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'navigate.html';
+            }
         });
-    }
-
-    function navigate() {
-        window.location.href = 'navigate.html';
-    }
+    });
+});
 
 // Map Zoom
 const mapElement = document.getElementById('uum-Map');
