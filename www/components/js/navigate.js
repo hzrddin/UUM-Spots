@@ -247,8 +247,58 @@ window.navigate = async function () {
 };
 
 window.endNavigation = function () {
-    if (watchId) navigator.geolocation.clearWatch(watchId);
-    window.location.href = 'home.html';
+    Swal.fire({
+        title: 'Save the moment',
+        html: `
+        <div class="mb-3 text-start">
+            <label class="form-label small fw-bold text-dark">Upload Picture</label>
+            <input type="file" id="swalImage" class="form-control shadow-none" accept="image/*">
+        </div>
+        <div class="mb-0 text-start">
+            <label class="form-label small fw-bold text-dark">Caption</label>
+            <input type="text" id="swalCaption" class="form-control shadow-none" placeholder="It was wonderful...">
+        </div>
+    `,
+        confirmButtonText: 'Save',
+        confirmButtonColor: '#0d6efd',
+        showCancelButton: true,
+        cancelButtonColor: '#6c757d',
+        customClass: {
+            popup: 'rounded-4 border-0 shadow'
+        },
+        
+        preConfirm: () => {
+            const imageFile = document.getElementById('swalImage').files[0];
+            const caption = document.getElementById('swalCaption').value;
+
+            // Select picture
+            if (!imageFile) {
+                Swal.showValidationMessage('Please select a picture first!');
+                return false;
+            }
+
+            // Pass the data to the next step
+            return {
+                image: imageFile,
+                caption: caption
+            };
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const savedImage = result.value.image;
+            const savedCaption = result.value.caption;
+
+            // Success confirmation
+            Swal.fire({
+                title: 'Saved!',
+                text: 'Your moment is saved.',
+                icon: 'success',
+                confirmButtonColor: '#0d6efd',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+    });
 };
 
 loadGMap();
