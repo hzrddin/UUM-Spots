@@ -266,7 +266,8 @@ window.endNavigation = function () {
         customClass: {
             popup: 'rounded-4 border-0 shadow'
         },
-        
+
+        //Validation
         preConfirm: () => {
             const imageFile = document.getElementById('swalImage').files[0];
             const caption = document.getElementById('swalCaption').value;
