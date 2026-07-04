@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="components/css/main.css">
 </head>
 
-<body>
+<body class="bg-light vh-100 overflow-hidden position-relative">
+    
     <!-- Header -->
     <nav class="navbar bg-dark border-bottom border-secondary shadow-sm py-3 z-3 position-relative">
         <div class="container d-flex align-items-center position-relative">
@@ -39,15 +40,18 @@
         </div>
     </nav>
 
+    <!-- Top banner -->
+    <div id="navTopBanner" class="position-absolute top-0 start-0 w-100 px-3 pt-3 z-3 d-none mt-5">
+    </div>
+
     <!-- Map -->
-    <div class="container-fluid px-3 mt-3 mb-4">
+    <div class="container-fluid px-3 mt-3 mb-4 position-relative z-1">
         <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-light" style="height: 60vh;">
             <div id="gMap" class="w-100 h-100"></div>
         </div>
     </div>
 
-    <!-- Desc -->
-    <div class="container-fluid px-3 mt-3">
+    <div id="setupCardContainer" class="container-fluid px-3 mt-3 position-relative z-2">
         <div class="card border-0 shadow-sm rounded-4 bg-white">
             <div class="card-body p-4">
 
@@ -75,7 +79,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center">
-                    <button type="button" onclick=""
+                    <button type="button" onclick="window.navigate()"
                         class="btn btn-primary px-5 w-75 fw-bold shadow-sm d-flex justify-content-center align-items-center gap-2">
                         Let's Go
                     </button>
@@ -85,8 +89,22 @@
         </div>
     </div>
 
+    <!-- live nav -->
+    <div id="navBottomPanel" class="position-fixed bottom-0 start-0 w-100 bg-white shadow-lg p-4 z-3 d-none border-top" style="border-top-left-radius: 1.5rem; border-top-right-radius: 1.5rem;">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <h2 id="activeTimeLeft" class="fw-bold text-success mb-0">-- min</h2>
+                <p id="activeDistanceLeft" class="text-muted fw-medium mb-0">-- km remaining</p>
+            </div>
+            <button onclick="window.endNavigation()" class="btn btn-danger rounded-pill px-4 py-2 fw-bold shadow-sm">
+                End Route
+            </button>
+        </div>
+    </div>
+
     <script src="components/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="components/js/turf.min.js"></script>
     <script src="components/js/sweetalert2.all.min.js"></script>
     <script src="components/js/config.js"></script>
     <script src="components/js/navigate.js"></script>

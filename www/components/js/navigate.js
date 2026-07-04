@@ -5,6 +5,9 @@ const gMapApi = window.APP_CONFIG.GOOGLE_MAP_API;
 let mapInstance = null;
 let destinationObj = null;
 let RouteLibrary = null;
+let userMarker = null;
+let watchId = null;
+let currentUserLocation = null;
 
 document.getElementById('navTitle').textContent = localStorage.getItem('destTitle');
 
@@ -14,15 +17,12 @@ window.initMap = async function () {
     const destLng = parseFloat(localStorage.getItem('savedLng'));
     destinationObj = { lat: destLat, lng: destLng };
 
-    // Import Google libraries 
     const { Map } = await google.maps.importLibrary("maps");
     const { Route } = await google.maps.importLibrary("routes");
     await google.maps.importLibrary("marker");
 
-    // Save Route library globally so the retry button can use it
     RouteLibrary = Route;
 
-    // Initialize the empty map
     mapInstance = new Map(document.getElementById("gMap"), {
         zoom: 15,
         center: destinationObj,
@@ -31,24 +31,19 @@ window.initMap = async function () {
         streetViewControl: false
     });
 
-    // Start the location request
     requestAndDrawRoute();
 };
 
-// Retry Function for SweetAlert2
 window.retryLocation = function () {
-    // Show a quick loading state while GPS tries to connect again
     Swal.fire({
         title: 'Finding location...',
         allowOutsideClick: false,
-        didOpen: () => {
-            Swal.showLoading();
-        }
+        didOpen: () => Swal.showLoading()
     });
     requestAndDrawRoute();
 };
 
-// Core Routing and Location Logic
+// Core Routing Logic (Stripped of turn-by-turn data)
 function requestAndDrawRoute() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -60,23 +55,21 @@ function requestAndDrawRoute() {
                     lng: position.coords.longitude
                 };
 
+                currentUserLocation = userLocation;
+
                 const request = {
                     origin: userLocation,
                     destination: destinationObj,
                     travelMode: 'DRIVING',
-                    fields: ['path', 'distanceMeters', 'durationMillis']
+                    fields: ['path', 'distanceMeters', 'durationMillis'] // Removed 'legs'
                 };
 
                 try {
                     const { routes } = await RouteLibrary.computeRoutes(request);
 
                     if (routes && routes.length > 0) {
-                        const rawDistance = routes[0].distanceMeters;
-                        const distanceKm = (rawDistance / 1000).toFixed(1) + " km";
-
-                        // returns milliseconds, divide by 60,000, minutes
-                        const rawMillis = routes[0].durationMillis;
-                        const timeMinutes = Math.round(rawMillis / 60000) + " min";
+                        const distanceKm = (routes[0].distanceMeters / 1000).toFixed(1) + " km";
+                        const timeMinutes = Math.round(routes[0].durationMillis / 60000) + " min";
 
                         document.getElementById('descCardTitle').textContent = localStorage.getItem('destTitle');
                         document.getElementById('routeDistance').textContent = distanceKm;
@@ -107,39 +100,28 @@ function requestAndDrawRoute() {
                             marker.content = container;
                         };
 
-                        // Attach labels to pins
                         if (markers[0]) attachVisibleLabel(markers[0], "Current Location");
                         if (markers[markers.length - 1]) attachVisibleLabel(markers[markers.length - 1], localStorage.getItem('destTitle'));
 
-                        // Drop pins on the map
                         markers.forEach((marker) => marker.map = mapInstance);
                     }
                 } catch (e) {
                     console.error("The New Routes API was blocked:", e);
                     showLocationError();
                 }
-
             },
-            (error) => {
-                showLocationError();
-            },
-            // The 30s timeout to allow accurate GPS lock
-            { enableHighAccuracy: true, timeout: 30000 } 
+            (error) => showLocationError(),
+            { enableHighAccuracy: true, timeout: 30000 }
         );
     } else {
-        console.warn("Browser does not support geolocation.");
         showLocationError();
     }
 }
 
 function showLocationError() {
     Swal.fire({
-        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="text-danger" viewBox="0 0 16 16">
-                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-                   </svg>`,
-        customClass: {
-            icon: 'border-0'
-        },
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="text-danger" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" /></svg>`,
+        customClass: { icon: 'border-0' },
         title: 'Location Required',
         text: 'We need your current location for navigation. Please allow location access in device settings.',
         confirmButtonText: 'Try Again',
@@ -147,11 +129,106 @@ function showLocationError() {
         allowOutsideClick: false,
         allowEscapeKey: false
     }).then((result) => {
-        if (result.isConfirmed) {
-            window.retryLocation();
-        }
+        if (result.isConfirmed) window.retryLocation();
     });
 }
+
+// --- PURE LIVE TRACKING (No instructions) ---
+window.navigate = async function () {
+    // Hide Setup UI
+    document.getElementById('setupCardContainer').classList.add('d-none');
+    const mainNav = document.querySelector('nav');
+    if (mainNav) mainNav.classList.add('d-none');
+
+    // Set initial Bottom Panel text
+    document.getElementById('activeTimeLeft').textContent = document.getElementById('routeTime').textContent;
+    document.getElementById('activeDistanceLeft').textContent = `${document.getElementById('routeDistance').textContent} remaining`;
+
+    // Show only the Bottom Panel
+    document.getElementById('navBottomPanel').classList.remove('d-none');
+
+    // Tilt map for GPS view
+    if (mapInstance) {
+        mapInstance.setZoom(19);
+        mapInstance.setTilt(55);
+    }
+
+    // Create a Custom GPS Arrow Icon for the user's location
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    if (!userMarker) {
+        const pin = document.createElement('div');
+        pin.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" style="filter: drop-shadow(0px 4px 5px rgba(0,0,0,0.4));">
+                <path fill="#0d6efd" stroke="#ffffff" stroke-width="2" d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
+            </svg>
+        `;
+
+        userMarker = new AdvancedMarkerElement({
+            map: mapInstance,
+            position: currentUserLocation || mapInstance.getCenter(),
+            content: pin
+        });
+    }
+
+    // Start Live GPS Tracking
+    if (navigator.geolocation && typeof turf !== 'undefined') {
+        watchId = navigator.geolocation.watchPosition(
+            (position) => {
+                const livePos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                // Move the arrow on the map
+                if (userMarker) {
+                    userMarker.position = livePos;
+                }
+
+                // Snap camera to user and rotate map based on direction faced
+                if (mapInstance) {
+                    mapInstance.panTo(livePos);
+                    if (position.coords.heading !== null && !isNaN(position.coords.heading)) {
+                        mapInstance.setHeading(position.coords.heading);
+                    }
+                }
+
+                // Update Remaining Distance via Turf.js
+                if (destinationObj) {
+                    const from = turf.point([livePos.lng, livePos.lat]);
+                    const to = turf.point([destinationObj.lng, destinationObj.lat]);
+
+                    const remainingKm = turf.distance(from, to, { units: 'kilometers' }).toFixed(2);
+                    const remainingMeters = remainingKm * 1000;
+
+                    const distanceUI = document.getElementById('activeDistanceLeft');
+                    if (distanceUI) distanceUI.textContent = `${remainingKm} km remaining`;
+
+                    // Destination Arrival Check
+                    if (remainingMeters <= 50) {
+                        navigator.geolocation.clearWatch(watchId);
+
+                        Swal.fire({
+                            title: 'You have arrived!',
+                            text: 'You reached your destination.',
+                            icon: 'success',
+                            confirmButtonText: 'Finish',
+                            customClass: { popup: 'rounded-4 border-0 shadow' }
+                        }).then(() => {
+                            window.location.href = 'home.html';
+                        });
+                    }
+                }
+            },
+            (error) => console.warn("Lost live GPS signal:", error),
+            { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
+        );
+    }
+};
+
+window.endNavigation = function () {
+    if (watchId) navigator.geolocation.clearWatch(watchId);
+    window.location.href = 'home.html';
+};
 
 loadGMap();
 
