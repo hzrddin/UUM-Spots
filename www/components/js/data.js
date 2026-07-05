@@ -122,5 +122,18 @@ if (signupForm) {
 
 // Change name home
 if (window.location.pathname.includes("home.html")) {
-  document.getElementById('homeName').textContent = localStorage.getItem('username');
+  document.getElementById('homeName').textContent = localStorage.getItem('fullname');
+}
+
+// Change name profile
+if (window.location.pathname.includes("user.html")) {
+  document.getElementById('user_us').textContent = localStorage.getItem('username');
+  document.getElementById('user_name').textContent = localStorage.getItem('fullname');
+  document.getElementById('date_Crt').textContent = localStorage.getItem('memSince');
+}
+
+// Logout
+function logout() {
+  localStorage.clear();
+  window.location.href = 'index.html';
 }
