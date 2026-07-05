@@ -31,6 +31,7 @@ if (loginForm) {
       .then(response => response.json())
       .then(result => {
         if (result.status === "success") {
+          localStorage.setItem("id", result.userID);
           localStorage.setItem("username", result.username);
           localStorage.setItem("fullname", result.fullname);
           localStorage.setItem("memSince", result.date_created);
@@ -137,3 +138,4 @@ function logout() {
   localStorage.clear();
   window.location.href = 'index.html';
 }
+
