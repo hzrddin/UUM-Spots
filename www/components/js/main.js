@@ -1,22 +1,6 @@
-const signupForm = document.getElementById('signupForm');
-
-// Bootstrap Validation
-if (signupForm) {
-    signupForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        if (!this.checkValidity()) {
-            event.stopPropagation();
-            this.classList.add('was-validated');
-            return;
-        }
-        this.classList.add('was-validated');
-
-    });
-}
-
 function tnc() {
     Swal.fire({
-        title: "Terms And Condition",
+        title: "Terms And Conditions",
         text: "Hi Dr, this is an easter egg implanted, congrats on founding! Happy Marking",
         icon: "info",
         width: "350px"

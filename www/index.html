@@ -22,7 +22,7 @@
 
             <div class="position-relative z-1 mt-4 mb-5">
                 <h2 class="fw-bold mb-0">Welcome to</h2>
-                <h1 class="fw-bold mb-3 text-info">jUUM jalan</h1>
+                <h1 class="fw-bold mb-3 text-warning">jUUM jalan</h1>
 
                 <p class="mb-4 text-white small w-75">
                     Discover the best places around UUM Sintok.
@@ -51,29 +51,27 @@
                                 <p class="text-muted small">Sign in to continue exploring UUM Spots</p>
                             </div>
 
-                            <form action="home.html">
+                            <form id="loginForm">
 
                                 <!-- Username -->
                                 <div class="mb-3">
                                     <label class="form-label small fw-bold text-dark mb-1">Username</label>
-                                    <input type="text" class="form-control shadow-none text-muted"
+                                    <input type="text" id="usernameInput" class="form-control shadow-none text-muted"
                                         placeholder="Enter your username" required>
                                 </div>
 
                                 <!-- Password -->
                                 <div class="mb-3">
                                     <label class="form-label small fw-bold text-dark mb-1">Password</label>
-                                    <input type="password" class="form-control shadow-none text-muted"
-                                        placeholder="Enter your password" required>
+                                    <input type="password" id="passwordInput"
+                                        class="form-control shadow-none text-muted" placeholder="Enter your password"
+                                        required>
                                 </div>
 
                                 <!-- Forgot Pass & New Acc -->
-                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="mb-3">
                                     <a href="signUp.html" class="text-decoration-none small fw-medium text-primary">
                                         Create Account
-                                    </a>
-                                    <a href="#" class="text-decoration-none small fw-medium text-primary">
-                                        Forgot password
                                     </a>
                                 </div>
 
@@ -93,6 +91,10 @@
     </div>
 
     <script src="components/js/bootstrap.bundle.min.js"></script>
+    <script src="components/js/sweetalert2.all.min.js"></script>
+    <script src="components/js/main.js"></script>
+    <script src="components/js/config.js"></script>
+    <script src="components/js/data.js"></script>
 </body>
 
 </html>

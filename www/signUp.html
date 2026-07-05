@@ -22,7 +22,7 @@
 
             <div class="position-relative z-1 mt-4 mb-5">
                 <h2 class="fw-bold mb-0">Join</h2>
-                <h1 class="fw-bold mb-3 text-info">jUUM jalan</h1>
+                <h1 class="fw-bold mb-3 text-warning">jUUM jalan</h1>
 
                 <p class="mb-4 text-white small w-75">
                     Create an account to discover the best places around UUM Sintok.
@@ -52,7 +52,7 @@
                                 <p class="text-muted small">Fill in your details to get started</p>
                             </div>
 
-                            <form id="signupForm" class="needs-validation" novalidate>
+                            <form id="signupForm" novalidate>
 
                                 <!-- Name -->
                                 <div class="mb-3">
@@ -60,8 +60,6 @@
                                         Name</label>
                                     <input type="text" class="form-control shadow-none text-muted" id="regName"
                                         name="name" placeholder="Enter your full name" required>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Please enter your name.</div>
                                 </div>
 
                                 <!-- Username -->
@@ -74,7 +72,6 @@
                                         <input type="text" class="form-control border-start-0 shadow-none text-muted"
                                             id="regUsername" name="username" aria-describedby="inputGroupPrepend"
                                             placeholder="Choose a username" required>
-                                        <div class="invalid-feedback">Please choose a username.</div>
                                     </div>
                                 </div>
 
@@ -84,18 +81,16 @@
                                         class="form-label small fw-bold text-dark mb-1">Password</label>
                                     <input type="password" class="form-control shadow-none text-muted" id="regPassword"
                                         name="password" placeholder="Create a password" required>
-                                    <div class="invalid-feedback">Please enter a password.</div>
                                 </div>
 
                                 <!-- Terms -->
                                 <div class="mb-4">
                                     <div class="form-check d-flex align-items-center mb-0">
-                                        <input class="form-check-input shadow-none mt-0 me-2" type="checkbox" value=""
+                                        <input class="form-check-input shadow-none mt-0 me-2" type="checkbox"
                                             id="invalidCheck" required>
                                         <label class="form-check-label text-dark fw-medium small" for="invalidCheck">
-                                            I agree to the <a onclick="tnc()" href="#">terms and condition.</a>
+                                            I agree to the <a onclick="tnc()" href="#">terms and conditions.</a>
                                         </label>
-                                        <div class="invalid-feedback">You must agree.</div>
                                     </div>
                                 </div>
 
@@ -103,7 +98,7 @@
                                 <div class="d-flex gap-2">
                                     <a href="index.html"
                                         class="btn btn-light w-50 rounded-3 py-2 fw-medium text-dark shadow-sm border">Back</a>
-                                    <button class="btn btn-primary w-50 rounded-3 py-2 fw-medium text-white shadow-sm"
+                                    <button class= "btn btn-primary w-50 rounded-3 py-2 fw-medium text-white shadow-sm"
                                         type="submit">Register</button>
                                 </div>
 
@@ -125,6 +120,8 @@
     </div>
 
     <script src="components/js/bootstrap.bundle.min.js"></script>
+    <script src="components/js/config.js"></script>
+    <script src="components/js/data.js"></script>
     <script src="components/js/main.js"></script>
     <script src="components/js/sweetalert2.all.min.js"></script>
 </body>
