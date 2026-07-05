@@ -31,6 +31,9 @@ if (loginForm) {
       .then(response => response.json())
       .then(result => {
         if (result.status === "success") {
+          localStorage.setItem("username", result.username);
+          localStorage.setItem("fullname", result.fullname);
+          localStorage.setItem("memSince", result.date_created);
           window.location.href = 'home.html';
         } else {
           Swal.fire({
@@ -117,3 +120,7 @@ if (signupForm) {
 
 }
 
+// Change name home
+if (window.location.pathname.includes("home.html")) {
+  document.getElementById('homeName').textContent = localStorage.getItem('username');
+}
