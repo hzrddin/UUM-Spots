@@ -1,12 +1,12 @@
-
-/*Zoom*/
-#scale-element {
-  display: block;
-  max-width: 100%;
-  margin: 1rem auto;
-  touch-action: none;
+img.uum_Map {
+  filter: brightness(10%);
 }
 
-#scale-element.reset {
-  transition: transform 0.3s ease-in-out;
+@font-face {
+  font-family: 'juumjalan';
+  src: url('../font/KGShadowOfTheDay.ttf');
+}
+
+.titleFont {
+  font-family: 'juumjalan' !important;
 }

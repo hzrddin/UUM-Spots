@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link href="components/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="components/css/main.css">
+</head>
+
+<body class="bg-light vh-100 overflow-hidden position-relative">
+    
+    <!-- Header -->
+    <nav class="navbar bg-dark border-bottom border-secondary shadow-sm py-3 z-3 position-relative">
+        <div class="container d-flex align-items-center position-relative">
+
+            <!-- Back -->
+            <a href="home.html" class="text-white text-decoration-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                    class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
+            </a>
+
+            <!-- Icon & Title -->
+            <div class="d-flex align-items-center gap-1 mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-geo-alt text-warning" viewBox="0 0 16 16">
+                    <path
+                        d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                </svg>
+                <h5 id="navTitle" class="fw-bold text-white mb-0">Loading...</h5>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Top banner -->
+    <div id="navTopBanner" class="position-absolute top-0 start-0 w-100 px-3 pt-3 z-3 d-none mt-5">
+    </div>
+
+    <!-- Map -->
+    <div class="container-fluid px-3 mt-3 mb-4 position-relative z-1">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-light" style="height: 60vh;">
+            <div id="gMap" class="w-100 h-100"></div>
+        </div>
+    </div>
+
+    <div id="setupCardContainer" class="container-fluid px-3 mt-3 position-relative z-2">
+        <div class="card border-0 shadow-sm rounded-4 bg-white">
+            <div class="card-body p-4">
+
+                <h5 class="card-title fw-bold mb-4 text-dark text-center" id="descCardTitle">Loading...</h5>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center text-muted">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            class="text-primary me-2" viewBox="0 0 16 16">
+                            <path
+                                d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                        </svg>
+                        <span class="fw-semibold text-dark" style="font-size: 16px;" id="routeDistance">-- km</span>
+                    </div>
+
+                    <div
+                        class="d-flex align-items-center badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2 shadow-sm border border-success border-opacity-25">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="me-2"
+                            viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+                        </svg>
+                        <span class="fw-bold" style="font-size: 14px;" id="routeTime">-- min</span>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="button" onclick="window.navigate()"
+                        class="btn btn-primary px-5 w-75 fw-bold shadow-sm d-flex justify-content-center align-items-center gap-2">
+                        Let's Go
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Live nav -->
+    <div id="navBottomPanel" class="position-fixed bottom-0 start-0 w-100 bg-white shadow-lg p-4 z-3 d-none border-top" style="border-top-left-radius: 1.5rem; border-top-right-radius: 1.5rem;">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <h2 id="activeTimeLeft" class="fw-bold text-success mb-0">-- min</h2>
+                <p id="activeDistanceLeft" class="text-muted fw-medium mb-0">-- km remaining</p>
+            </div>
+            <button onclick="window.endNavigation()" class="btn btn-danger rounded-pill px-4 py-2 fw-bold shadow-sm">
+                End Route
+            </button>
+        </div>
+    </div>
+
+    <script src="components/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="components/js/turf.min.js"></script>
+    <script src="components/js/sweetalert2.all.min.js"></script>
+    <script src="components/js/config.js"></script>
+    <script src="components/js/navigate.js"></script>
+</body>
+
+</html>

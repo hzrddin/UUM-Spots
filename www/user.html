@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <script src="cordova.js"></script>
     <script src="components/loader.js"></script>
     <link rel="stylesheet" href="components/loader.css">
     <link href="components/css/bootstrap.min.css" rel="stylesheet">
@@ -30,16 +29,20 @@
             <div class="mb-4">
                 <div class="d-flex justify-content-between py-2 border-bottom">
                     <span class="text-muted">Username</span>
-                    <span class="fw-semibold">Abdul Dudul</span>
+                    <span id="user_us" class="fw-semibold">username</span>
                 </div>
                 <div class="d-flex justify-content-between py-2 border-bottom">
                     <span class="text-muted">Name</span>
-                    <span class="fw-semibold">Haza</span>
+                    <span id="user_name" class="fw-semibold">name</span>
+                </div>
+                <div class="d-flex justify-content-between py-2 border-bottom">
+                    <span class="text-muted">Date Account Created</span>
+                    <span id="date_Crt" class="fw-semibold">11 September 2001</span>
                 </div>
             </div>
 
-            <button type="button" onclick="clearLogs()" class="btn btn-danger w-100 rounded-pill py-2 mt-2">
-                Clear All Records
+            <button type="button" onclick="logout()" class="btn btn-danger w-100 rounded-pill py-2 mt-2">
+                Logout
             </button>
 
         </div>
@@ -92,9 +95,9 @@
         </div>
     </nav>
 
-    </div>
-
     <script src="components/js/bootstrap.bundle.min.js"></script>
+    <script src="components/js/config.js"></script>
+    <script src="components/js/data.js"></script>
 </body>
 
 </html>

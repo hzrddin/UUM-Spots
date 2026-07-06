@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <script src="cordova.js"></script>
     <script src="components/loader.js"></script>
     <link rel="stylesheet" href="components/loader.css">
     <link href="components/css/bootstrap.min.css" rel="stylesheet">
@@ -23,13 +22,17 @@
 
             <div class="position-relative z-1 mt-4 mb-5">
                 <h2 class="fw-bold mb-0">Join</h2>
-                <h1 class="fw-bold mb-3 text-info">UUM Spots</h1>
+                <h1 class="fw-bold mb-3 text-warning">
+                    <span class="titleFont">j</span>UUM
+                    <span class="titleFont">jalan</span>
+                </h1>
 
-                <p class="mb-4 text-white-50 small w-75">
+
+                <p class="mb-4 text-white small w-75">
                     Create an account to discover the best places around UUM Sintok.
                 </p>
 
-                <p class="mb-0 small text-white-50 d-flex align-items-center fw-medium">
+                <p class="mb-0 small text-white d-flex align-items-center fw-medium">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="me-2"
                         viewBox="0 0 16 16">
                         <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
@@ -39,6 +42,7 @@
             </div>
         </div>
 
+        <!-- Reg-->
         <div class="container position-relative z-1">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-10 col-md-8 col-lg-5">
@@ -52,59 +56,65 @@
                                 <p class="text-muted small">Fill in your details to get started</p>
                             </div>
 
-                            <!-- Form with Validation -->
-                            <form id="signupForm" class="needs-validation" novalidate>
-                                
+                            <form id="signupForm" novalidate>
+
                                 <!-- Name -->
                                 <div class="mb-3">
-                                    <label for="regName" class="form-label small fw-bold text-dark mb-1">Full Name</label>
-                                    <input type="text" class="form-control shadow-none text-muted" id="regName" name="name" placeholder="Enter your full name" required>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Please enter your name.</div>
+                                    <label for="regName" class="form-label small fw-bold text-dark mb-1">Full
+                                        Name</label>
+                                    <input type="text" class="form-control shadow-none text-muted" id="regName"
+                                        name="name" placeholder="Enter your full name" required>
                                 </div>
 
                                 <!-- Username -->
                                 <div class="mb-3">
-                                    <label for="regUsername" class="form-label small fw-bold text-dark mb-1">Username</label>
+                                    <label for="regUsername"
+                                        class="form-label small fw-bold text-dark mb-1">Username</label>
                                     <div class="input-group has-validation">
-                                        <span class="input-group-text bg-light text-muted border-end-0" id="inputGroupPrepend">@</span>
-                                        <input type="text" class="form-control border-start-0 shadow-none text-muted" id="regUsername" name="username" aria-describedby="inputGroupPrepend" placeholder="Choose a username" required>
-                                        <div class="invalid-feedback">Please choose a username.</div>
+                                        <span class="input-group-text bg-light text-muted border-end-0"
+                                            id="inputGroupPrepend">@</span>
+                                        <input type="text" class="form-control border-start-0 shadow-none text-muted"
+                                            id="regUsername" name="username" aria-describedby="inputGroupPrepend"
+                                            placeholder="Choose a username" required>
                                     </div>
                                 </div>
 
                                 <!-- Password -->
                                 <div class="mb-4">
-                                    <label for="regPassword" class="form-label small fw-bold text-dark mb-1">Password</label>
-                                    <input type="password" class="form-control shadow-none text-muted" id="regPassword" name="password" placeholder="Create a password" required>
-                                    <div class="invalid-feedback">Please enter a password.</div>
+                                    <label for="regPassword"
+                                        class="form-label small fw-bold text-dark mb-1">Password</label>
+                                    <input type="password" class="form-control shadow-none text-muted" id="regPassword"
+                                        name="password" placeholder="Create a password" required>
                                 </div>
 
-                                <!-- Terms Checkbox -->
+                                <!-- Terms -->
                                 <div class="mb-4">
                                     <div class="form-check d-flex align-items-center mb-0">
-                                        <input class="form-check-input shadow-none mt-0 me-2" type="checkbox" value="" id="invalidCheck" required>
+                                        <input class="form-check-input shadow-none mt-0 me-2" type="checkbox"
+                                            id="invalidCheck" required>
                                         <label class="form-check-label text-dark fw-medium small" for="invalidCheck">
-                                            I agree to the terms and conditions
+                                            I agree to the <a onclick="tnc()" href="#">terms and conditions.</a>
                                         </label>
-                                        <div class="invalid-feedback">You must agree.</div>
                                     </div>
                                 </div>
 
                                 <!-- Action Buttons -->
                                 <div class="d-flex gap-2">
-                                    <a href="index.html" class="btn btn-light w-50 rounded-3 py-2 fw-medium text-dark shadow-sm border">Back</a>
-                                    <button class="btn btn-primary w-50 rounded-3 py-2 fw-medium text-white shadow-sm" type="submit">Register</button>
+                                    <a href="index.html"
+                                        class="btn btn-light w-50 rounded-3 py-2 fw-medium text-dark shadow-sm border">Back</a>
+                                    <button class="btn btn-primary w-50 rounded-3 py-2 fw-medium text-white shadow-sm"
+                                        type="submit">Register</button>
                                 </div>
 
                                 <!-- Divider & Login Link -->
                                 <div class="text-center mt-4">
                                     <span class="text-muted small">Already have an account?</span>
-                                    <a href="index.html" class="text-decoration-none fw-bold text-primary ms-1 small">Sign in</a>
+                                    <a href="index.html"
+                                        class="text-decoration-none fw-bold text-primary ms-1 small">Sign in</a>
                                 </div>
 
                             </form>
-                            
+
                         </div>
                     </div>
 
@@ -114,24 +124,10 @@
     </div>
 
     <script src="components/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Bootstrap Validation Script -->
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (() => {
-            'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
+    <script src="components/js/config.js"></script>
+    <script src="components/js/data.js"></script>
+    <script src="components/js/main.js"></script>
+    <script src="components/js/sweetalert2.all.min.js"></script>
 </body>
 
 </html>
