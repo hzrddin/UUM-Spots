@@ -12,7 +12,6 @@ const placeCards = document.querySelectorAll('.card[data-title]');
 placeCards.forEach(card => {
     card.addEventListener('click', function () {
         // Details 
-        const placeID = this.getAttribute('data-id');
         const title = this.getAttribute('data-title');
         const category = this.getAttribute('data-category');
         const desc = this.getAttribute('data-desc');
@@ -26,8 +25,8 @@ placeCards.forEach(card => {
         if (category === 'Sports') badgeColor = 'text-bg-danger';
 
         // Save
-        localStorage.setItem('placeID', placeID);
         localStorage.setItem('destTitle', title);
+        localStorage.setItem('data-category', category)
         localStorage.setItem('savedLat', lat);
         localStorage.setItem('savedLng', lng);
 

@@ -31,7 +31,7 @@ if (loginForm) {
       .then(response => response.json())
       .then(result => {
         if (result.status === "success") {
-          localStorage.setItem("id", result.userID);
+          localStorage.setItem("userID", result.userID);
           localStorage.setItem("username", result.username);
           localStorage.setItem("fullname", result.fullname);
           localStorage.setItem("memSince", result.date_created);

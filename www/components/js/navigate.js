@@ -246,8 +246,7 @@ window.navigate = async function () {
     }
 };
 
-
-window.endNavigation = function (destTitle) {
+window.endNavigation = function () {
     Swal.fire({
         title: 'Save the moment',
         html: `
@@ -268,18 +267,15 @@ window.endNavigation = function (destTitle) {
             popup: 'rounded-4 border-0 shadow'
         },
 
-        // Validation
         preConfirm: () => {
             const imageFile = document.getElementById('swalImage').files[0];
             const caption = document.getElementById('swalCaption').value.trim();
 
-            // Select picture validation
             if (!imageFile) {
                 Swal.showValidationMessage('Please select a picture first!');
                 return false;
             }
 
-            // Pass the data to the next step
             return {
                 image: imageFile,
                 caption: caption
@@ -288,21 +284,31 @@ window.endNavigation = function (destTitle) {
     }).then((result) => {
         if (result.isConfirmed) {
 
-            // 1. Gather all required data
+            // 1. Gather files and user input
             const savedImage = result.value.image;
             const savedCaption = result.value.caption;
-            const userID = localStorage.getItem('userID'); // Pulling from your login storage!
-            const currentDate = new Date().toISOString().split('T')[0]; // Gets YYYY-MM-DD format
 
-            // 2. Package it into FormData (Required for files)
+            // 2. Pull IDs and Text from Storage
+            const userID = localStorage.getItem('userID');
+            const placeName = localStorage.getItem('placeName');
+            const placeDesc = localStorage.getItem('placeDesc');
+            const placeType = localStorage.getItem('placeType');
+
+            if (!userID) {
+                Swal.fire('Error', 'Missing User ID. Please log in again.', 'error');
+                return;
+            }
+
+            // 3. Package it into FormData matching the new DB structure
             let formData = new FormData();
-            formData.append('photo', savedImage);      // The actual image file
-            formData.append('caption', savedCaption);  // Text
-            formData.append('userID', userID);     
-            formData.append('placeName', destTitle);  
-            formData.append('date', currentDate);    
+            formData.append('photo', savedImage);
+            formData.append('caption', savedCaption);
+            formData.append('userID', userID);
+            formData.append('placeName', placeName);
+            formData.append('placeDesc', placeDesc);
+            formData.append('types', placeType);
 
-            // 3. Send to saveact.php
+            // 4. Send to saveact.php
             fetch(serverUrl + '/saveact.php', {
                 method: 'POST',
                 body: formData
@@ -310,7 +316,6 @@ window.endNavigation = function (destTitle) {
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === "success") {
-                        // Success
                         Swal.fire({
                             title: 'Saved!',
                             text: 'Your moment is saved.',
@@ -322,7 +327,6 @@ window.endNavigation = function (destTitle) {
                             window.location.href = 'history.html';
                         });
                     } else {
-                        // PHP reject
                         Swal.fire({
                             icon: "error",
                             title: "Save Failed",
@@ -331,7 +335,6 @@ window.endNavigation = function (destTitle) {
                     }
                 })
                 .catch(error => {
-                    // Network error
                     Swal.fire({
                         icon: "error",
                         title: "Upload Error",
@@ -340,7 +343,6 @@ window.endNavigation = function (destTitle) {
                 });
 
         } else {
-            // Cancel
             window.location.href = 'home.html';
         }
     });
