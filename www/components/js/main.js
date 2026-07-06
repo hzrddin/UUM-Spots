@@ -12,6 +12,7 @@ const placeCards = document.querySelectorAll('.card[data-title]');
 placeCards.forEach(card => {
     card.addEventListener('click', function () {
         // Details 
+        const placeID = this.getAttribute('data-id');
         const title = this.getAttribute('data-title');
         const category = this.getAttribute('data-category');
         const desc = this.getAttribute('data-desc');
@@ -20,11 +21,12 @@ placeCards.forEach(card => {
         const lng = this.getAttribute('data-lng');
 
         // Badge color
-        let badgeColor = 'text-bg-success'; // Default for Nature & Animals
+        let badgeColor = 'text-bg-success';
         if (category === 'Landmark') badgeColor = 'text-bg-warning';
         if (category === 'Sports') badgeColor = 'text-bg-danger';
 
         // Save
+        localStorage.setItem('placeID', placeID);
         localStorage.setItem('destTitle', title);
         localStorage.setItem('savedLat', lat);
         localStorage.setItem('savedLng', lng);

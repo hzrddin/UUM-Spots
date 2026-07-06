@@ -1,4 +1,4 @@
-const serverBaseUrl = window.APP_CONFIG.SERVER_URL;
+const serverUrl = window.APP_CONFIG.SERVER_URL;
 const gMapApi = window.APP_CONFIG.GOOGLE_MAP_API;
 
 // Global variables
@@ -247,7 +247,7 @@ window.navigate = async function () {
 };
 
 
-window.endNavigation = function (placeID) {
+window.endNavigation = function (destTitle) {
     Swal.fire({
         title: 'Save the moment',
         html: `
@@ -299,7 +299,7 @@ window.endNavigation = function (placeID) {
             formData.append('photo', savedImage);      // The actual image file
             formData.append('caption', savedCaption);  // Text
             formData.append('userID', userID);     
-            formData.append('placeName', placeName);  
+            formData.append('placeName', destTitle);  
             formData.append('date', currentDate);    
 
             // 3. Send to saveact.php
