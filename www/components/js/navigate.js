@@ -292,7 +292,6 @@ window.endNavigation = function () {
             // 2. Pull IDs and Text from Storage
             const userID = localStorage.getItem('userID');
             const placeName = localStorage.getItem('destTitle');
-            const placeDesc = localStorage.getItem('placeDesc');
             const placeType = localStorage.getItem('destCat');
 
             if (!userID) {
@@ -306,7 +305,6 @@ window.endNavigation = function () {
             formData.append('caption', savedCaption);
             formData.append('userID', userID);
             formData.append('placeName', placeName);
-            formData.append('placeDesc', placeDesc);
             formData.append('types', placeType);
 
             // 4. Send to saveact.php (Standard JSON Processing)

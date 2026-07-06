@@ -211,20 +211,18 @@ function viewMoment(moment) {
   Swal.fire({
     title: moment.placename,
     html: `
-            <div class="mb-3">
-                <img src="${serverUrl}/${moment.momentfilepath}" class="img-fluid rounded" style="max-height: 250px; object-fit: cover;" alt="Moment Image">
-            </div>
-            <p class="text-muted mb-1"><span class="badge text-bg-secondary">${moment.types}</span></p>
-            <p class="mb-2 small text-muted">${moment.placedesc}</p>
-            <p class="mb-0 fs-6"><strong>"${moment.caption || 'No caption'}"</strong></p>
-            <p class="small text-muted mt-3 mb-0">Saved on: ${moment.datecreated}</p>
-        `,
+        <div class="mb-3">
+            <img src="${serverUrl}/${moment.momentfilepath}" class="img-fluid rounded" style="max-height: 250px; object-fit: cover;" alt="Moment Image">
+        </div>
+        <p class="text-muted mb-1"><span class="badge text-bg-secondary">${moment.types}</span></p>
+        <p class="mb-0 fs-6"><strong>"${moment.caption || 'No caption'}"</strong></p>
+        <p class="small text-muted mt-3 mb-0">Saved on: ${moment.datecreated}</p>
+    `,
     confirmButtonText: 'Close',
     confirmButtonColor: '#6c757d',
     customClass: { popup: 'rounded-4 border-0 shadow' }
   });
 }
-
 // Edit moment
 function editMoment(moment) {
   Swal.fire({
