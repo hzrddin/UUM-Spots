@@ -7,7 +7,7 @@ let destinationObj = null;
 let RouteLibrary = null;
 let userMarker = null;
 let watchId = null;
-let currentUserLocation = null; // Saves initial GPS for exact arrow spawn
+let currentUserLocation = null;
 
 document.getElementById('navTitle').textContent = localStorage.getItem('destTitle');
 
@@ -246,6 +246,7 @@ window.navigate = async function () {
     }
 };
 
+// save act
 window.endNavigation = function () {
     Swal.fire({
         title: 'Save the moment',
@@ -299,7 +300,7 @@ window.endNavigation = function () {
                 return;
             }
 
-            // 3. Package it into FormData matching the new DB structure
+            // 3. Package it into FormData
             let formData = new FormData();
             formData.append('photo', savedImage);
             formData.append('caption', savedCaption);
@@ -308,7 +309,7 @@ window.endNavigation = function () {
             formData.append('placeDesc', placeDesc);
             formData.append('types', placeType);
 
-            // 4. Send to saveact.php
+            // 4. Send to saveact.php (Standard JSON Processing)
             fetch(serverUrl + '/saveact.php', {
                 method: 'POST',
                 body: formData
