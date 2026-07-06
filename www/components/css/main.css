@@ -1,3 +1,12 @@
-img.uum_Map{
-  filter:  brightness(10%);
+img.uum_Map {
+  filter: brightness(10%);
+}
+
+@font-face {
+  font-family: 'juumjalan';
+  src: url('../font/KGShadowOfTheDay.ttf');
+}
+
+.titleFont {
+  font-family: 'juumjalan' !important;
 }
