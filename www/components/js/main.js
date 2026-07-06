@@ -15,26 +15,25 @@ if (searchInput) {
     searchInput.addEventListener('input', runFilters);
 }
 
-// category button
+// Category
 window.filterPlaces = function(category, clickedButton) {
     activeCategory = category;
 
-    // Grab button
     const allButtons = document.querySelectorAll('.filter-btn');
     
-    // Reset all
+    // Reset
     allButtons.forEach(btn => {
         btn.classList.remove('btn-primary', 'text-white');
         btn.classList.add('btn-white', 'text-secondary');
     });
 
-    // Make the clicked button active
+    // Active
     if (clickedButton) {
         clickedButton.classList.remove('btn-white', 'text-secondary');
         clickedButton.classList.add('btn-primary', 'text-white');
     }
 
-    // Run filter
+    // Filter
     runFilters();
 };
 

@@ -185,17 +185,14 @@ if (window.location.pathname.includes("history.html")) {
       });
   }
 
-  // 2. The Master Click Listener for the container
+  // Click Listener
   historyContainer.addEventListener('click', function (e) {
-    // Find the card we clicked inside of
     const card = e.target.closest('.card');
-    if (!card) return; // If we didn't click inside a card, ignore it
+    if (!card) return;
 
-    // Grab the moment ID and look up its data
     const momentId = card.getAttribute('data-momentid');
     const moment = window.momentsData.find(m => m.momentid == momentId);
 
-    // Check which button was clicked
     if (e.target.classList.contains('view-btn')) {
       viewMoment(moment);
     } else if (e.target.classList.contains('edit-btn')) {
@@ -298,7 +295,6 @@ function deleteMoment(momentId, cardElement) {
               timer: 1500,
               showConfirmButton: false
             });
-            // Remove the card instantly without reloading the page
             cardElement.remove();
           } else {
             Swal.fire('Error', data.message, 'error');
