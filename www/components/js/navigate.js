@@ -246,7 +246,8 @@ window.navigate = async function () {
     }
 };
 
-window.endNavigation = function () {
+
+window.endNavigation = function (placeID) {
     Swal.fire({
         title: 'Save the moment',
         html: `
@@ -267,12 +268,12 @@ window.endNavigation = function () {
             popup: 'rounded-4 border-0 shadow'
         },
 
-        //Validation
+        // Validation
         preConfirm: () => {
             const imageFile = document.getElementById('swalImage').files[0];
-            const caption = document.getElementById('swalCaption').value;
+            const caption = document.getElementById('swalCaption').value.trim();
 
-            // Select picture
+            // Select picture validation
             if (!imageFile) {
                 Swal.showValidationMessage('Please select a picture first!');
                 return false;
@@ -286,22 +287,60 @@ window.endNavigation = function () {
         }
     }).then((result) => {
         if (result.isConfirmed) {
+
+            // 1. Gather all required data
             const savedImage = result.value.image;
             const savedCaption = result.value.caption;
+            const userID = localStorage.getItem('userID'); // Pulling from your login storage!
+            const currentDate = new Date().toISOString().split('T')[0]; // Gets YYYY-MM-DD format
 
-            // Success
-            Swal.fire({
-                title: 'Saved!',
-                text: 'Your moment is saved.',
-                icon: 'success',
-                confirmButtonColor: '#0d6efd',
-                timer: 2000,
-                showConfirmButton: false
-            }).then(() => {
-                window.location.href = 'history.html';
-            });
+            // 2. Package it into FormData (Required for files)
+            let formData = new FormData();
+            formData.append('photo', savedImage);      // The actual image file
+            formData.append('caption', savedCaption);  // Text
+            formData.append('userID', userID);     
+            formData.append('placeName', placeName);  
+            formData.append('date', currentDate);    
+
+            // 3. Send to saveact.php
+            fetch(serverUrl + '/saveact.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        // Success
+                        Swal.fire({
+                            title: 'Saved!',
+                            text: 'Your moment is saved.',
+                            icon: 'success',
+                            confirmButtonColor: '#0d6efd',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = 'history.html';
+                        });
+                    } else {
+                        // PHP reject
+                        Swal.fire({
+                            icon: "error",
+                            title: "Save Failed",
+                            text: data.message,
+                        });
+                    }
+                })
+                .catch(error => {
+                    // Network error
+                    Swal.fire({
+                        icon: "error",
+                        title: "Upload Error",
+                        text: error.message
+                    });
+                });
 
         } else {
+            // Cancel
             window.location.href = 'home.html';
         }
     });

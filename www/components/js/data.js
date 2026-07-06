@@ -139,3 +139,8 @@ function logout() {
   window.location.href = 'index.html';
 }
 
+// Save activity
+
+
+// Update Activity
+// Delete Activity
