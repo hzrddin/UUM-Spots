@@ -26,7 +26,7 @@ placeCards.forEach(card => {
 
         // Save
         localStorage.setItem('destTitle', title);
-        localStorage.setItem('data-category', category)
+        localStorage.setItem('destCat', category)
         localStorage.setItem('savedLat', lat);
         localStorage.setItem('savedLng', lng);
 

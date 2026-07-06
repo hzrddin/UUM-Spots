@@ -291,9 +291,9 @@ window.endNavigation = function () {
 
             // 2. Pull IDs and Text from Storage
             const userID = localStorage.getItem('userID');
-            const placeName = localStorage.getItem('placeName');
+            const placeName = localStorage.getItem('destTitle');
             const placeDesc = localStorage.getItem('placeDesc');
-            const placeType = localStorage.getItem('placeType');
+            const placeType = localStorage.getItem('destCat');
 
             if (!userID) {
                 Swal.fire('Error', 'Missing User ID. Please log in again.', 'error');
