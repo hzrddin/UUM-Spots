@@ -7,6 +7,63 @@ function tnc() {
     });
 }
 
+let activeCategory = 'All';
+
+// Listen for search
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+    searchInput.addEventListener('input', runFilters);
+}
+
+// category button
+window.filterPlaces = function(category, clickedButton) {
+    activeCategory = category;
+
+    // Grab button
+    const allButtons = document.querySelectorAll('.filter-btn');
+    
+    // Reset all
+    allButtons.forEach(btn => {
+        btn.classList.remove('btn-primary', 'text-white');
+        btn.classList.add('btn-white', 'text-secondary');
+    });
+
+    // Make the clicked button active
+    if (clickedButton) {
+        clickedButton.classList.remove('btn-white', 'text-secondary');
+        clickedButton.classList.add('btn-primary', 'text-white');
+    }
+
+    // Run filter
+    runFilters();
+};
+
+function runFilters() {
+    const searchText = document.getElementById('searchInput').value.toLowerCase();
+    
+    // Grab every card inside the directory container
+    const allCards = document.querySelectorAll('.card[data-category]');
+
+    allCards.forEach(card => {
+        // Read the data from the HTML
+        const title = card.getAttribute('data-title').toLowerCase();
+        const category = card.getAttribute('data-category');
+
+        // Check if this card matches the search text
+        const matchesSearch = title.includes(searchText);
+        
+        // Check if this card matches the selected button
+        const matchesCategory = (activeCategory === 'All' || category === activeCategory);
+
+        // If it matches BOTH, show it. Otherwise, hide it using Bootstrap's d-none
+        if (matchesSearch && matchesCategory) {
+            card.classList.remove('d-none');
+        } else {
+            card.classList.add('d-none');
+        }
+    });
+}
+
 const placeCards = document.querySelectorAll('.card[data-title]');
 
 placeCards.forEach(card => {
@@ -22,7 +79,7 @@ placeCards.forEach(card => {
         // Badge color
         let badgeColor = 'text-bg-success';
         if (category === 'Landmark') badgeColor = 'text-bg-warning';
-        if (category === 'Sports') badgeColor = 'text-bg-danger';
+        if (category === 'Activities') badgeColor = 'text-bg-danger';
 
         // Save
         localStorage.setItem('destTitle', title);

@@ -50,19 +50,20 @@
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
                     </span>
-                    <input type="text" class="form-control border-0 shadow-none py-2"
+                    <input type="text" id="searchInput" class="form-control border-0 shadow-none py-2"
                         placeholder="Search places, services...">
                 </div>
 
                 <!-- Filter -->
                 <div class="d-flex gap-1 overflow-x-auto pb-2" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    <button type="button" onclick="filter('all')"
-                        class="btn btn-primary rounded-pill btn-sm px-4 fw-medium shadow-sm">
-                        All</button>
+                    <button type="button" onclick="filterPlaces('All', this)"
+                        class="btn btn-primary text-white rounded-pill btn-sm px-4 fw-medium shadow-sm filter-btn">
+                        All
+                    </button>
 
                     <!-- Nature & Animals -->
-                    <button type="button" onclick="filter('n&a')"
-                        class="btn btn-white rounded-pill btn-sm px-3 fw-medium text-secondary shadow-sm border d-flex align-items-center text-nowrap">
+                    <button type="button" onclick="filterPlaces('Nature & Animals', this)"
+                        class="btn btn-white text-secondary rounded-pill btn-sm px-3 fw-medium shadow-sm border d-flex align-items-center text-nowrap filter-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="text-success me-2" viewBox="0 0 16 16">
                             <path
@@ -72,8 +73,8 @@
                     </button>
 
                     <!-- Activities -->
-                    <button type="button" onclick="('actv')"
-                        class="btn btn-white rounded-pill btn-sm px-3 fw-medium text-secondary shadow-sm border d-flex align-items-center text-nowrap">
+                    <button type="button" onclick="filterPlaces('Activities', this)"
+                        class="btn btn-white text-secondary rounded-pill btn-sm px-3 fw-medium shadow-sm border d-flex align-items-center text-nowrap filter-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="text-danger me-2" viewBox="0 0 16 16">
                             <path
@@ -83,8 +84,8 @@
                     </button>
 
                     <!-- Landmarks -->
-                    <button type="button" onclick="('landm')"
-                        class="btn btn-white rounded-pill btn-sm px-3 fw-medium text-secondary shadow-sm border d-flex align-items-center text-nowrap">
+                    <button type="button" onclick="filterPlaces('Landmark', this)"
+                        class="btn btn-white text-secondary rounded-pill btn-sm px-3 fw-medium shadow-sm border d-flex align-items-center text-nowrap filter-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="text-warning me-2" viewBox="0 0 16 16">
                             <path
@@ -100,10 +101,8 @@
             <div class="d-flex flex-column gap-3 mt-1 pb-5">
 
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative d-flex flex-row"
-                    data-title="Bulatan Masa" 
-                    data-category="Landmark"
-                    data-desc="Snap a memory at the iconic Bulatan Masa." 
-                    data-img="components/images/bulatan_masa.webp"
+                    data-title="Bulatan Masa" data-category="Landmark"
+                    data-desc="Snap a memory at the iconic Bulatan Masa." data-img="components/images/bulatan_masa.webp"
                     data-lat="6.4475" data-lng="100.5094">
 
                     <img src="components/images/bulatan_masa.webp" class="object-fit-cover" style="width: 45%;"
@@ -129,11 +128,9 @@
                 </div>
 
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative d-flex flex-row"
-                    data-title="Ostrich Farm" 
-                    data-category="Nature & Animals"
+                    data-title="Ostrich Farm" data-category="Nature & Animals"
                     data-desc="Get up close with our friendly ostriches!"
-                    data-img="components/images/karting-star-bali.webp" 
-                    data-lat="6.4570" data-lng="100.5047">
+                    data-img="components/images/karting-star-bali.webp" data-lat="6.4570" data-lng="100.5047">
 
                     <img src="components/images/karting-star-bali.webp" class="object-fit-cover" style="width: 45%;"
                         alt="Ostrich Farm">
@@ -158,11 +155,9 @@
                 </div>
 
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative d-flex flex-row"
-                    data-title="UUM Go-Kart" 
-                    data-category="Sports" 
+                    data-title="UUM Go-Kart" data-category="Activities"
                     data-desc="Feel the speed at Sintok Go-Kart Track."
-                    data-img="components/images/karting-star-bali.webp" 
-                    data-lat="6.4702" data-lng="100.5040">
+                    data-img="components/images/karting-star-bali.webp" data-lat="6.4702" data-lng="100.5040">
 
                     <img src="components/images/karting-star-bali.webp" class="object-fit-cover" style="width: 45%;"
                         alt="Go-Kart">
@@ -170,7 +165,7 @@
                     <div class="card-body p-2 px-3 d-flex flex-column justify-content-between w-100">
                         <div>
                             <h6 class="card-title fw-bold mb-1 pe-4">UUM Go-Kart</h6>
-                            <span class="badge text-bg-danger rounded-pill mb-1 fw-normal">Sports</span>
+                            <span class="badge text-bg-danger rounded-pill mb-1 fw-normal">Activities</span>
                             <p class="card-text text-muted small mb-0">Feel the speed at Sintok Go-Kart Track.</p>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mt-2">
@@ -187,11 +182,9 @@
                 </div>
 
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative d-flex flex-row"
-                    data-title="Pet Farm" 
-                    data-category="Nature & Animals"
+                    data-title="Pet Farm" data-category="Nature & Animals"
                     data-desc="Meet rabbits & peacocks at the Pet Farm."
-                    data-img="components/images/karting-star-bali.webp" 
-                    data-lat="6.4506" data-lng="100.5070">
+                    data-img="components/images/karting-star-bali.webp" data-lat="6.4506" data-lng="100.5070">
 
                     <img src="components/images/karting-star-bali.webp" class="object-fit-cover" style="width: 45%;"
                         alt="Pet Farm">
@@ -216,10 +209,8 @@
                 </div>
 
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden position-relative d-flex flex-row"
-                    data-title="Deer Park" 
-                    data-category="Nature & Animals"
-                    data-desc="Say hello to the deer at Deer Park." 
-                    data-img="components/images/karting-star-bali.webp"
+                    data-title="Deer Park" data-category="Nature & Animals"
+                    data-desc="Say hello to the deer at Deer Park." data-img="components/images/karting-star-bali.webp"
                     data-lat="6.4751" data-lng="100.5016">
 
                     <img src="components/images/karting-star-bali.webp" class="object-fit-cover" style="width: 45%;"
