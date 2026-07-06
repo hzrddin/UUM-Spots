@@ -285,11 +285,11 @@ window.endNavigation = function () {
     }).then((result) => {
         if (result.isConfirmed) {
 
-            // 1. Gather files and user input
+            // Gather files and input
             const savedImage = result.value.image;
             const savedCaption = result.value.caption;
 
-            // 2. Pull IDs and Text from Storage
+            //  IDs and detail
             const userID = localStorage.getItem('userID');
             const placeName = localStorage.getItem('destTitle');
             const placeType = localStorage.getItem('destCat');
@@ -299,7 +299,6 @@ window.endNavigation = function () {
                 return;
             }
 
-            // 3. Package it into FormData
             let formData = new FormData();
             formData.append('photo', savedImage);
             formData.append('caption', savedCaption);
@@ -307,7 +306,6 @@ window.endNavigation = function () {
             formData.append('placeName', placeName);
             formData.append('types', placeType);
 
-            // 4. Send to saveact.php (Standard JSON Processing)
             fetch(serverUrl + '/saveact.php', {
                 method: 'POST',
                 body: formData
